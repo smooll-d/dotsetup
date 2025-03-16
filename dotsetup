@@ -1,0 +1,39 @@
+#!/bin/bash
+
+source "$(dirname "$0")/utils.sh"
+
+if [ $1 = "--help" ] || [ $1 = "-h" ]; then
+    __dotsetup_help
+    exit 0
+elif [ $1 = "--version" ] || [ $1 = "-v" ]; then
+    __dotsetup_version
+    exit 0
+fi
+
+__dotsetup_log INFO "dotsetup v1.0.0\n"
+
+__dotsetup_dry_run $@
+
+__dotsetup_log WARNING "To execute commands which require elevated permissions and keep dotsetup"
+__dotsetup_log WARNING "running without sudo interrupting, it requires your password at the start"
+__dotsetup_log WARNING "to keep the sudo session running, dotsetup will then add your user to"
+__dotsetup_log WARNING "the /etc/sudeors file so sudo will not interrupt in the middle of"
+__dotsetup_log WARNING "execution. Don't worry, /etc/sudoers will be reset to its previous"
+__dotsetup_log WARNING "state after dotsetup is finished."
+
+__dotsetup_setup_sudoers_file
+
+sudo hwclock --systohc
+
+__dotsetup_start_measuring_time
+
+source "$(dirname "$0")/install-packages.sh"
+source "$(dirname "$0")/setup-system-configs.sh"
+source "$(dirname "$0")/setup-home.sh"
+source "$(dirname "$0")/setup-suckless.sh"
+
+__dotsetup_end_measuring_time
+
+__dotsetup_calculate_time
+
+__dotsetup_delete_backups

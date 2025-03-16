@@ -1,0 +1,14 @@
+bdf-unifont
+bibata-cursor-theme-bin
+canon-pixma-mg2500-complete
+kora-icon-theme
+mkinitcpio-firmware
+openrazer-meta-git
+polychromatic
+sc-controller-git
+scolorpicker
+thorium-browser-bin
+unicode
+volctl
+wired
+yay-bin
