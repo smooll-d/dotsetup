@@ -55,6 +55,7 @@ __dotsetup_log INFO "Enabling systemd services..."
 
 __dotsetup_execute 'sudo systemctl enable bluetooth'
 __dotsetup_execute 'sudo systemctl enable cpupower'
+__dotsetup_execute 'sudo systemctl enable systemd-oomd'
 __dotsetup_execute 'sudo systemctl enable ly'
 
 __dotsetup_log INFO "Disabling getty@tty2 service..."
