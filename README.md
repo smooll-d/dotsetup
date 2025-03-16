@@ -1,5 +1,5 @@
 # dotsetup
-Bash script used to setup my dotfiles.
+Bash script used to set up my dotfiles.
 
 ## Warning Stuff
 I wanted to include this message at the end of the README but I feel like I have to say this before doing anything else:
@@ -33,25 +33,41 @@ As dotsetup is a pretty big script, it's not actually one script. If you're read
 
 This unfortunately means that you need to download the whole directory. But fortunately if the CLI program you use to download stuff off the Internet can download a zip file, then you're good to go.
 
-### cURL
+### Prerequisites
+Before you do anything, you have to install the utility with which you'll download dotsetup and depending on which option you choose, you'll have to install one additional tool.
+
+Below is a list of Arch Linux packages for the three options listed in the [Downloading](#Downloading) section:
+
+- `curl` + `unzip` (Option 1)
+- `wget` + `unzip` (Option 2)
+- `git` (Option 3)
+
+Depending on how you've set up your Arch installation, `curl` should already be installed (testing in a VM after using `archinstall` showed curl already being present on the system).
+
+### Downloading
+Below are three ways you can download dotsetup on your system. I recommend using git as it is by far the easiest to use. It does not require installing `unzip` and you get everything with one command.
+
+#### cURL
 
 ```bash
 $ curl -LO https://github.com/smooll-d/dotsetup/archive/refs/heads/master.zip
 $ unzip master.zip
 ```
 
-### wget
+#### wget
 
 ```bash
 $ wget https://github.com/smooll-d/dotsetup/archive/refs/heads/master.zip -O dotsetup.zip
 $ unzip dotsetup.zip
 ```
 
-### git
+#### git
 
 ```bash
-$ git clone https://github.com/smooll-d/dotsetup.git
+$ git clone --depth 1 https://github.com/smooll-d/dotsetup.git
 ```
+
+Of course these aren't the only three options, you can download dotsetup with whichever tool you like to use, just remember to install it first.
 
 ## Usage
 Even though dotsetup comes with many scripts, it was designed with ease of use in mind. That means, to run dotsetup, the only thing you need to do is:
@@ -86,4 +102,4 @@ Edit the files to remove any unwanted packages and dotsetup will install them.
 > [!CAUTION]
 > Before installing packages from `packages-pacman.txt`, pacman will also install `vulkan-radeon`, `lib32-vulkan-radeon`, `virtualbox-host-modules-arch` and `man-db`. If you don't want them, you'll have to edit the `install-packages.sh` script and remove them yourself.
 
-In actuality, you could customize everything, you just need to know a bit of bash.
+In actuality, you could customize everything, you just need to know a bit of shell scripting.
