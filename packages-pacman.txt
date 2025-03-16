@@ -53,6 +53,7 @@ qbittorrent
 redshift
 ripgrep
 rofi
+rsync
 sddm
 simple-scan
 spotify-launcher
