@@ -16,7 +16,7 @@ __dotsetup_log()
 {
     local level="$1"
     shift
-    local message="$@"
+    local message="$*"
 
     case "${level}" in
         SUCCESS) echo -e "${__dotsetup_green}V ${message}${__dotsetup_reset}" ;;
@@ -32,7 +32,8 @@ __dotsetup_backup_files()
     local path="$1"
 
     if [ -f "${path}" ] || [ -d "${path}" ]; then
-        local owner=$(stat -c "%U" "${path}")
+        local owner
+        owner=$(stat -c "%U" "${path}")
 
         if [ "${owner}" != "$(whoami)" ]; then
             __dotsetup_log WARNING "Backing up ${path}..."
@@ -89,7 +90,7 @@ __dotsetup_check_last_command()
 
 __dotsetup_dry_run()
 {
-    if [ $1 = "--dry-run" ] || [ $1 = "-d" ]; then
+    if [ "$1" = "--dry-run" ] || [ "$1" = "-d" ]; then
         __dotsetup_log WARNING "Dry running...\n"
         __dotsetup_dry_ran=true
     else
