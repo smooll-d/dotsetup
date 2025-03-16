@@ -1,5 +1,0 @@
-repos:
-- repo: https://github.com/smooll-d/dotsetup
-  rev: v1.0.0
-  hooks:
-    - id: dotsetup
