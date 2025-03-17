@@ -1,7 +1,5 @@
 #!/bin/bash
 
-clear
-
 __dotsetup_files=("utils.sh" "install-packages.sh" "packages-pacman.txt" "packages-aur.txt" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh")
 
 for __dotsetup_file in "${__dotsetup_files[@]}"; do
@@ -21,7 +19,7 @@ elif [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
     exit 0
 fi
 
-__dotsetup_log INFO "dotsetup v1.0.0\n"
+__dotsetup_log INFO "dotsetup ${__dotsetup_version}\n"
 
 __dotsetup_dry_run "$@"
 

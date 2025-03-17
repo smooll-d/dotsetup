@@ -12,6 +12,8 @@ fi
 
 __dotsetup_sudo_user="${USER} ALL=(ALL) NOPASSWD: ALL"
 
+__dotsetup_version="v1.1.0"
+
 __dotsetup_log()
 {
     local level="$1"
@@ -150,6 +152,6 @@ __dotsetup_help()
 
 __dotsetup_version()
 {
-    echo -e "dotsetup v1.0.0"
+    echo -e "dotsetup ${__dotsetup_version}"
     echo -e "Made with ${__dotsetup_red}<3${__dotsetup_reset} by smooll-d!"
 }
