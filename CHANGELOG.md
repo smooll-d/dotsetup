@@ -6,3 +6,7 @@
 
 <br>
 
+## **v1.0.0**&emsp;<sub><sup>2025-03-17 ([af477d5...af477d5](https://github.com/smooll-d/dotsetup/compare/af477d5784237cddb7d480e83fd528cb52abcf78...af477d5784237cddb7d480e83fd528cb52abcf78?diff=split))</sup></sub>
+
+### Initial commit
+<br>
