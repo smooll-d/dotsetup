@@ -2,11 +2,6 @@
 
 source "$(dirname "$0")/utils.sh"
 
-if [ ! -e "${HOME}/dotfiles" ]; then
-    __dotsetup_log WARNING "dotfiles not found, downloading..."
-    __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
-fi
-
 __dotsetup_log INFO "Setting up ${HOME}..."
 
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/wallpapers'

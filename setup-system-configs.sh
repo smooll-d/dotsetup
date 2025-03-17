@@ -2,6 +2,11 @@
 
 source "$(dirname "$0")/utils.sh"
 
+if [ ! -e "${HOME}/dotfiles" ]; then
+    __dotsetup_log WARNING "dotfiles not found, downloading..."
+    __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
+fi
+
 __dotsetup_log INFO "Setting up system-wide configurations..."
 
 __dotsetup_execute '__dotsetup_backup_files /etc/mkinitcpio.conf'
