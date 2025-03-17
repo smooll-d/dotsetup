@@ -12,7 +12,7 @@ fi
 
 __dotsetup_sudo_user="${USER} ALL=(ALL) NOPASSWD: ALL"
 
-__dotsetup_version="v1.2.0"
+__dotsetup_version="v1.2.1"
 
 __dotsetup_log()
 {
