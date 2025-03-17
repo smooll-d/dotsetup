@@ -18,6 +18,7 @@ dotsetup is a pretty ambitious setup script, current features include:
 - Tracking of the time it took to finish setup (v1.0.0)
 - Option to dry run the script before actually committing (`--dry-run`, v1.0.0)
 - Running from one script and letting dotsetup download everything (v1.1.0)
+- Download of dotfiles if it hasn't been downloaded already (v1.2.1)
 
 Planned features include:
 
@@ -120,20 +121,3 @@ You do not have to cd into the directory, you can run it, sit back, relax, enjoy
 > $ chmod +x ./install-packages.sh
 > $ ./install-packages.sh
 > ```
-
-## Adding Packages
-Pretty much all of the setup script is hardcoded as it should be because it's a setup script for me and my specific needs, but there is one piece of this "software" that isn't 100% hardcoded and that is, package installation.
-
-You can add/remove your own packages by editing the `packages-pacman.txt` and `packages-aur.txt` for pacman and yay respectively. You could even generate your own package files by running:
-
-```bash
-$ pacman -Qqn > packages-pacman.txt
-$ pacman -Qqm > packages-aur.txt
-```
-
-Edit the files to remove any unwanted packages and dotsetup will install them.
-
-> [!IMPORTANT]
-> Before installing packages from `packages-pacman.txt`, pacman will also install `vulkan-radeon`, `lib32-vulkan-radeon`, `virtualbox-host-modules-arch` and `man-db`. If you don't want them, you'll have to edit the `install-packages.sh` script and remove them yourself.
-
-In actuality, you could customize everything, you just need to know a bit of shell scripting.
