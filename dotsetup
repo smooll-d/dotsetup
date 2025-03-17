@@ -1,18 +1,29 @@
 #!/bin/bash
 
+clear
+
+__dotsetup_files=("utils.sh" "install-packages.sh" "packages-pacman.txt" "packages-aur.txt" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh")
+
+for __dotsetup_file in "${__dotsetup_files[@]}"; do
+    if [ ! -e "$(dirname "$0")/${__dotsetup_file}" ]; then
+        echo -e "\033[33m! ${__dotsetup_file} not found, downloading...\033[0m"
+        curl -# -LO https://github.com/smooll-d/dotsetup/raw/refs/heads/master/${__dotsetup_file}
+    fi
+done
+
 source "$(dirname "$0")/utils.sh"
 
-if [ $1 = "--help" ] || [ $1 = "-h" ]; then
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     __dotsetup_help
     exit 0
-elif [ $1 = "--version" ] || [ $1 = "-v" ]; then
+elif [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
     __dotsetup_version
     exit 0
 fi
 
 __dotsetup_log INFO "dotsetup v1.0.0\n"
 
-__dotsetup_dry_run $@
+__dotsetup_dry_run "$@"
 
 __dotsetup_log WARNING "To execute commands which require elevated permissions and keep dotsetup"
 __dotsetup_log WARNING "running without sudo interrupting, it requires your password at the start"
@@ -23,7 +34,7 @@ __dotsetup_log WARNING "state after dotsetup is finished."
 
 __dotsetup_setup_sudoers_file
 
-sudo hwclock --systohc
+__dotsetup_execute 'sudo hwclock --systohc'
 
 __dotsetup_start_measuring_time
 
