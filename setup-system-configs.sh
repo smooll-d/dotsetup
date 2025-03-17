@@ -15,14 +15,14 @@ __dotsetup_execute '__dotsetup_backup_files /etc/ly/config.ini'
 
 __dotsetup_log INFO "Copying ${HOME}/dotfiles/etc..."
 
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/mkinitcpio.conf /etc/mkinitcpio.conf'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/pacman.conf /etc/pacman.conf'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/default/cpupower /etc/default/cpupower'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/default/grub /etc/default/grub'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/X11/xorg.conf.d/20-amdgpu.conf /etc/X11/xorg.conf.d/20-amdgpu.conf'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf'
-__dotsetup_execute 'sudo cp --preserve=mode ${HOME}/dotfiles/etc/ly/config.ini /etc/ly/config.ini'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/mkinitcpio.conf /etc/mkinitcpio.conf'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/pacman.conf /etc/pacman.conf'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/default/cpupower /etc/default/cpupower'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/default/grub /etc/default/grub'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/X11/xorg.conf.d/20-amdgpu.conf /etc/X11/xorg.conf.d/20-amdgpu.conf'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/ly/config.ini /etc/ly/config.ini'
 
 __dotsetup_execute '__dotsetup_backup_files /usr/share/xsessions'
 __dotsetup_execute '__dotsetup_backup_files /usr/share/applications/steam.desktop'
@@ -30,14 +30,14 @@ __dotsetup_execute '__dotsetup_backup_files /usr/share/applications/steam-native
 
 __dotsetup_log INFO "Copying ${HOME}/dotfiles/usr..."
 
-__dotsetup_execute 'sudo cp -r ${HOME}/dotfiles/usr/share/xsessions /usr/share/xsessions'
-__dotsetup_execute 'sudo chmod 755 /usr/share/xsessions'
-__dotsetup_execute 'sudo chmod 644 /usr/share/xsessions/dwm.desktop'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/xsessions /usr/share'
+# __dotsetup_execute 'sudo chmod 755 /usr/share/xsessions'
+# __dotsetup_execute 'sudo chmod 644 /usr/share/xsessions/dwm.desktop'
 
-__dotsetup_execute 'sudo cp ${HOME}/dotfiles/usr/share/applications/steam.desktop /usr/share/applications'
-__dotsetup_execute 'sudo cp ${HOME}/dotfiles/usr/share/applications/steam-native.desktop /usr/share/applications'
-__dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam.desktop'
-__dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam-native.desktop'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/applications/steam.desktop /usr/share/applications'
+__dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/applications/steam-native.desktop /usr/share/applications'
+# __dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam.desktop'
+# __dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam-native.desktop'
 
 __dotsetup_log INFO "Setting plymouth theme..."
 
