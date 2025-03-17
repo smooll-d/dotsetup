@@ -1,3 +1,8 @@
+## **v1.2.2**&emsp;<sub><sup>2025-03-17 ([336a393...c583088](https://github.com/smooll-d/dotsetup/compare/336a393deee48a88e3c0e3574f3dd11017b23c96...c583088e54d89ab9ee4363bf04db5ee65836d374?diff=split))</sup></sub>
+
+*no relevant changes*
+<br>
+
 ## **v1.2.1**&emsp;<sub><sup>2025-03-17 ([655a5d0...80f8322](https://github.com/smooll-d/dotsetup/compare/655a5d007d5bcd80e16552c0e8db7d6c6d0eba30...80f8322bbaaf650054ce1ac8097f63b459be4a77?diff=split))</sup></sub>
 
 ### Bug Fixes
