@@ -19,11 +19,11 @@ dotsetup is a pretty ambitious setup script, current features include:
 - Option to dry run the script before actually committing (`--dry-run`, v1.0.0)
 - Running from one script and letting dotsetup download everything (v1.1.0)
 - Download of dotfiles if it hasn't been downloaded already (v1.2.1)
+- Ability to run each script included with dotsetup seperately by calling dotsetup with options (`--rerun`, v1.3.0)
 
 Planned features include:
 
 - Setup from `archiso` to complete evironment ready to run on first reboot
-- Ability to run each script included with dotsetup seperately by calling dotsetup with options
 
 ## Supported Distributions
 Currently dotsetup is only available on Arch Linux and I do not believe that will change. Unless I stop using Arch Linux and move to a different distro.
@@ -38,8 +38,8 @@ Before you do anything, you have to install the utility with which you'll downlo
 
 Below is a list of Arch Linux packages for the three options listed in the [Downloading](#Downloading) section:
 
-- `curl` + `unzip` (Option 1, `unzip` is not required if using single download)
-- `wget` + `unzip` (Option 2, `unzip` is not required if using single download)
+- `curl` + `unzip` (Option 1, `unzip` is not required if using single file download)
+- `wget` + `unzip` (Option 2, `unzip` is not required if using single file download)
 - `git` (Option 3)
 
 Depending on how you've set up your Arch installation, `curl` should already be installed (testing in a VM after using `archinstall` showed curl already being present on the system).
@@ -111,13 +111,6 @@ $ path/to/dotsetup
 $ path/to/dotsetup/dotsetup
 ```
 
-You do not have to cd into the directory, you can run it, sit back, relax, enjoy a cup of coffee, eat something, watch a movie, ~jerk off~, anything. After a while (depending mainly on your internet connection but also your computer's speed), you can reboot your computer and everything ~should~ will be up and running.
+You do not have to cd into the directory, you can run it, sit back, relax, enjoy a cup of coffee, eat something, watch a movie, ~~jerk off~~, anything. After a while (depending mainly on your internet connection but also your computer's speed), you can reboot your computer and everything ~~should~~ will be up and running.
 
-> [!TIP]
-> If at any point, one of the steps fails, you can rerun that step (though this has not been tested) by executing that step's script.
-> If for example installation of packages fails, you can execute the `install-packages.sh` script, though be mindful that you need to give it permissions to execute:
-> ```bash
-> $ cd path/to/dotsetup/
-> $ chmod +x ./install-packages.sh
-> $ ./install-packages.sh
-> ```
+**Be sure to check out the [wiki](https://github.com/smooll-d/dotsetup/wiki) for tips and tricks as well as explanations of useful options!** 
