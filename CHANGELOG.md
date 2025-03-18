@@ -1,3 +1,11 @@
+## **v1.3.0**&emsp;<sub><sup>2025-03-18 ([ddab7ca...3d4225f](https://github.com/smooll-d/dotsetup/compare/ddab7ca299e774918b7dbf74ba12d27879504d60...3d4225fd10b487333a1520f5102b14a8ebbd6b73?diff=split))</sup></sub>
+
+### Features
+
+- add new \`\-\-rerun\` option ([fd759b4](https://github.com/smooll-d/dotsetup/commit/fd759b48d2135132a4b9d7dc36a04d5458c466c1))
+
+<br>
+
 ## **v1.2.3**&emsp;<sub><sup>2025-03-17 ([751db79...433c27d](https://github.com/smooll-d/dotsetup/compare/751db79c60b56f38c242b009a4e3cff5088ff68a...433c27d39deb7a7a90c1fcc0a995107b7f42bc5c?diff=split))</sup></sub>
 
 *no relevant changes*
