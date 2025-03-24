@@ -22,5 +22,9 @@ __dotsetup_log INFO "Installing packages from packages-aur.txt..."
 
 __dotsetup_execute 'yay -S --noconfirm --needed - < "$(dirname "$0")/packages-aur.txt"'
 
+__dotsetup_log INFO "Installing pre-commit..."
+
+__dotsetup_execute 'pipx install pre-commit'
+
 __dotsetup_execute 'sudo gpasswd -a $USER plugdev'
 __dotsetup_execute 'sudo gpasswd -a $USER docker'

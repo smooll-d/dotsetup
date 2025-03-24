@@ -49,6 +49,7 @@ picom
 playerctl
 plymouth
 python
+python-pipx
 qbittorrent
 redshift
 ripgrep
