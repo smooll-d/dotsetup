@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source "$(dirname "$0")/utils.sh"
+source "$(dirname "$0")/src/utils.sh"
 
+# Check if dotfiles directory exists in /home. If not, download it
 if [ ! -e "${HOME}/dotfiles" ]; then
     __dotsetup_log WARNING "dotfiles not found, downloading..."
     __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
@@ -9,6 +10,7 @@ fi
 
 __dotsetup_log INFO "Setting up system-wide configurations..."
 
+# Backup all files and directories in /etc
 __dotsetup_execute '__dotsetup_backup_files /etc/mkinitcpio.conf'
 __dotsetup_execute '__dotsetup_backup_files /etc/pacman.conf'
 __dotsetup_execute '__dotsetup_backup_files /etc/default/cpupower'
@@ -20,6 +22,7 @@ __dotsetup_execute '__dotsetup_backup_files /etc/ly/config.ini'
 
 __dotsetup_log INFO "Copying ${HOME}/dotfiles/etc..."
 
+# Copy all files and directories from dotfiles using rsync
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/mkinitcpio.conf /etc/mkinitcpio.conf'
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/pacman.conf /etc/pacman.conf'
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/default/cpupower /etc/default/cpupower'
@@ -29,23 +32,22 @@ __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/X11/xorg.conf.d/20-amdgp
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf'
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/etc/ly/config.ini /etc/ly/config.ini'
 
+# Backup all files and directories in /usr/share
 __dotsetup_execute '__dotsetup_backup_files /usr/share/xsessions'
 __dotsetup_execute '__dotsetup_backup_files /usr/share/applications/steam.desktop'
 __dotsetup_execute '__dotsetup_backup_files /usr/share/applications/steam-native.desktop'
 
 __dotsetup_log INFO "Copying ${HOME}/dotfiles/usr..."
 
+# Copy all files and directories from dotfiles using rsync
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/xsessions /usr/share'
-# __dotsetup_execute 'sudo chmod 755 /usr/share/xsessions'
-# __dotsetup_execute 'sudo chmod 644 /usr/share/xsessions/dwm.desktop'
 
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/applications/steam.desktop /usr/share/applications'
 __dotsetup_execute 'sudo rsync -av ${HOME}/dotfiles/usr/share/applications/steam-native.desktop /usr/share/applications'
-# __dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam.desktop'
-# __dotsetup_execute 'sudo chmod 644 /usr/share/applications/steam-native.desktop'
 
 __dotsetup_log INFO "Setting plymouth theme..."
 
+# Set plymouth default theme and regenerate initramfs using mkinitcpio
 __dotsetup_execute 'sudo plymouth-set-default-theme -R bgrt'
 
 __dotsetup_check_last_command

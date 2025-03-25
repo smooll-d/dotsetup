@@ -1,19 +1,24 @@
 #!/bin/bash
 
+# Colors
 __dotsetup_reset="\033[0m"
 __dotsetup_red="\033[31m"
 __dotsetup_green="\033[32m"
 __dotsetup_yellow="\033[33m"
 __dotsetup_cyan="\033[36m"
 
+# Check if __dotsetup_backups array is empty. If it is, create it
 if [ -z "${__dotsetup_backups[*]}" ]; then
     __dotsetup_backups=()
 fi
 
+# String used to supress sudo from asking for password
 __dotsetup_sudo_user="${USER} ALL=(ALL) NOPASSWD: ALL"
 
+# Current version of dotsetup
 __dotsetup_version="v1.3.0"
 
+# Handle parameters
 __dotsetup_cli()
 {
     if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
@@ -60,16 +65,17 @@ __dotsetup_cli()
     fi
 }
 
+# Main function of dotsetup
 __dotsetup_main()
 {
     __dotsetup_setup_sudoers_file
 
     __dotsetup_start_measuring_time
 
-    source "$(dirname "$0")/install-packages.sh"
-    source "$(dirname "$0")/setup-system-configs.sh"
-    source "$(dirname "$0")/setup-home.sh"
-    source "$(dirname "$0")/setup-suckless.sh"
+    source "$(dirname "$0")/src/install-packages.sh"
+    source "$(dirname "$0")/src/setup-system-configs.sh"
+    source "$(dirname "$0")/src/setup-home.sh"
+    source "$(dirname "$0")/src/setup-suckless.sh"
 
     __dotsetup_end_measuring_time
 
@@ -78,13 +84,14 @@ __dotsetup_main()
     __dotsetup_delete_backups
 }
 
+# Function used in rerunning steps of dotsetup
 __dotsetup_rerun()
 {
     __dotsetup_setup_sudoers_file
 
     __dotsetup_start_measuring_time
 
-    source "$(dirname "$0")/$1"
+    source "$(dirname "$0")/src/$1"
 
     __dotsetup_end_measuring_time
 
@@ -93,6 +100,7 @@ __dotsetup_rerun()
     __dotsetup_delete_backups
 }
 
+# Logging function
 __dotsetup_log()
 {
     local level="$1"
@@ -108,6 +116,7 @@ __dotsetup_log()
     esac
 }
 
+# Function responsible for creating backups of files and directories
 __dotsetup_backup_files()
 {
     local path="$1"
@@ -128,6 +137,7 @@ __dotsetup_backup_files()
     fi
 }
 
+# Function responsible for destroying backups of files and directories
 __dotsetup_delete_backups()
 {
     read -p "Delete backed up files? [y/N]: " __dotsetup_delete_backups
@@ -162,6 +172,7 @@ __dotsetup_delete_backups()
     esac
 }
 
+# Checks if last command executed successfully. If not, prints a message and exits
 __dotsetup_check_last_command()
 {
     if [ $? -ne 0 ]; then
@@ -170,6 +181,7 @@ __dotsetup_check_last_command()
     fi
 }
 
+# Checks if __dotsetup_dry_ran is true. If it is, it prints the command that would be run. If not, executes the command
 __dotsetup_execute()
 {
     if ${__dotsetup_dry_ran}; then
@@ -179,16 +191,19 @@ __dotsetup_execute()
     fi
 }
 
+# Syncs the hardware clock (mainly for vm testing but doesn't hurt to run) and creates a variable with the current time in seconds
 __dotsetup_start_measuring_time()
 {
     __dotsetup_execute 'sudo hwclock --systohc'
     __dotsetup_start_time=$(date +%s)
 }
 
+# Creates a variable with current time in seconds
 __dotsetup_end_measuring_time() {
     __dotsetup_end_time=$(date +%s)
 }
 
+# Calculates the elapsed time of setup from start to finish (before backup destruction) and passes it to a variable in a nice format
 __dotsetup_calculate_time()
 {
     local elapsed_time=$((__dotsetup_end_time - __dotsetup_start_time))
@@ -196,6 +211,7 @@ __dotsetup_calculate_time()
     printf -v __dotsetup_duration "%02d:%02d:%02d" $((elapsed_time / 3600)) $(((elapsed_time % 3600) / 60)) $((elapsed_time % 60))
 }
 
+# Appends the __dotsetup_sudo_user contents to the end of /etc/sudoers and uses trap to execute it's removal at the very end of dotsetup
 __dotsetup_setup_sudoers_file()
 {
     __dotsetup_log WARNING "To execute commands which require elevated permissions and keep dotsetup"
@@ -210,6 +226,7 @@ __dotsetup_setup_sudoers_file()
     trap __dotsetup_reset_sudoers_file EXIT
 }
 
+# Removes the contents of __dotsetup_sudo_user from /etc/sudoers essentially resetting the file to its previous state.
 __dotsetup_reset_sudoers_file()
 {
     __dotsetup_log INFO "Resetting /etc/sudoers..."
@@ -219,6 +236,7 @@ __dotsetup_reset_sudoers_file()
     __dotsetup_log SUCCESS "Finished in ${__dotsetup_duration}!"
 }
 
+# Help message explaining the usage of dotsetup and its options
 __dotsetup_help()
 {
     echo -e "Usage: dotsetup [-h || -v || -d || -r <packages || system || home || suckless> [-d]]"
@@ -230,6 +248,7 @@ __dotsetup_help()
     echo -e "\t--rerun,   -r    Rerun specified step and quit."
 }
 
+# Message displaying the current version of dotsetup.
 __dotsetup_version()
 {
     echo -e "dotsetup ${__dotsetup_version}"
