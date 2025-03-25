@@ -1,14 +1,43 @@
 #!/bin/bash
 
-__dotsetup_files=("utils.sh" "install-packages.sh" "packages-pacman.txt" "packages-aur.txt" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh")
+# Array of every script dotsetup uses
+__dotsetup_scripts=("utils.sh" "install-packages.sh" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh")
 
-for __dotsetup_file in "${__dotsetup_files[@]}"; do
-    if [ ! -e "$(dirname "$0")/${__dotsetup_file}" ]; then
-        echo -e "\033[33m! ${__dotsetup_file} not found, downloading...\033[0m"
-        curl -# -LO https://github.com/smooll-d/dotsetup/raw/refs/heads/master/${__dotsetup_file}
+# Array of every package file dotsetup uses
+__dotsetup_files=("packages-pacman.txt" "packages-aur.txt")
+
+# Current branch dotsetup should download scripts and package files from
+__dotsetup_branch="full"
+
+# Check if src/ and packages/ exist. If not, create them
+if [ ! -e "$(dirname "$0")/src" ]; then
+    mkdir src
+elif [ ! -e "$(dirname "$0")/packages" ]; then
+    mkdir packages
+fi
+
+# Iterate over every element in the __dotsetup_scripts
+for __dotsetup_script in "${__dotsetup_scripts[@]}"; do
+    # Check if file under the name of current element in __dotsetup_scripts exists. If not, download it to src/
+    if [ ! -e "$(dirname "$0")/src/${__dotsetup_script}" ]; then
+        echo -e "\033[33m! ${__dotsetup_script} not found, downloading...\033[0m"
+        curl -# -fLo ./src/${__dotsetup_script} https://github.com/smooll-d/dotsetup/raw/refs/heads/${__dotsetup_branch}/${__dotsetup_script}
     fi
 done
 
-source "$(dirname "$0")/utils.sh"
+# I hate this solution because I know that there is a better way of doing this than just doing two seperate for loops that do exactly the same thing but I cannot think of anything (To Pimp A Butterfly is the greatest (rap) album of all time).
 
+# Iterate over every element in the __dotsetup_files
+for __dotsetup_file in "${__dotsetup_files[@]}"; do
+    # Check if file under the name of current element in __dotsetup_scripts exists. If not, download it to src/
+    if [ ! -e "$(dirname "$0")/packages/${__dotsetup_file}" ]; then
+        echo -e "\033[33m! ${__dotsetup_file} not found, downloading...\033[0m"
+        curl -# -fLo ./packages/${__dotsetup_file} https://github.com/smooll-d/dotsetup/raw/refs/heads/${__dotsetup_branch}/${__dotsetup_file}
+    fi
+done
+
+# Source the contents of utils.sh for the __dotsetup_cli function
+source "$(dirname "$0")/src/utils.sh"
+
+# Handle CLI parameters
 __dotsetup_cli "$@"
