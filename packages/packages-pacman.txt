@@ -28,8 +28,10 @@ gutenprint
 imlib2
 irqbalance
 linux-headers
+lib32-vulkan-radeon
 lxappearance
 ly
+man-db
 mpv
 neovim
 network-manager-applet
@@ -66,9 +68,11 @@ ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 ugrep
 unrar
-unzip
+unzi
 virtualbox
+virtualbox-host-modules-arch
 virtualbox-guest-iso
+vulkan-radeon
 wget
 xbindkeys
 xf86-video-vesa
