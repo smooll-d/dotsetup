@@ -12,7 +12,9 @@ fi
 
 __dotsetup_sudo_user="${USER} ALL=(ALL) NOPASSWD: ALL"
 
-__dotsetup_version="v1.3.0"
+__dotsetup_version="v1.3.1"
+
+__dotsetup_dotfiles_directory=""
 
 __dotsetup_cli()
 {
@@ -108,9 +110,21 @@ __dotsetup_log()
     esac
 }
 
+__dotsetup_detect_personal()
+{
+    if findmnt --mountpoint "/personal" > /dev/null; then
+        __dotsetup_log INFO "Found mounted personal partition..."
+        return 0
+    else
+        __dotsetup_log INFO "Mounted personal partition not found, using fallback..."
+        return 1
+    fi
+}
+
 __dotsetup_backup_files()
 {
     local path="$1"
+    local copy="$2"
 
     if [ -f "${path}" ] || [ -d "${path}" ]; then
         local owner
@@ -118,11 +132,19 @@ __dotsetup_backup_files()
 
         if [ "${owner}" != "$(whoami)" ]; then
             __dotsetup_log WARNING "Backing up ${path}..."
-            __dotsetup_execute 'sudo mv "${path}" "${path}.bak"'
+            if [ "${copy}" == "copy" ]; then
+                __dotsetup_execute 'sudo cp "${path}" "${path}.bak"'
+            else
+                __dotsetup_execute 'sudo mv "${path}" "${path}.bak"'
+            fi
             __dotsetup_backups+=("${path}.bak")
         else
             __dotsetup_log WARNING "Backing up ${path}..."
-            __dotsetup_execute 'mv "${path}" "${path}.bak"'
+            if [ "${copy}" == "copy" ]; then
+                __dotsetup_execute 'cp "${path}" "${path}.bak"'
+            else
+                __dotsetup_execute 'mv "${path}" "${path}.bak"'
+            fi
             __dotsetup_backups+=("${path}.bak")
         fi
     fi

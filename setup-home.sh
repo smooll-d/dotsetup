@@ -19,6 +19,7 @@ __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/redshift'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/rofi'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/wired'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/mpv'
+__dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/ncdu'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/spicetify'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/OpenTabletDriver'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/PCSX2'
@@ -32,9 +33,9 @@ __dotsetup_execute '__dotsetup_backup_files ${HOME}/.zshrc'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.xinitrc'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.xprofile'
 
-__dotsetup_log INFO "Stowing ${HOME}/dotfiles/home..."
+__dotsetup_log INFO "Stowing ${__dotsetup_dotfiles_directory}/home..."
 
-__dotsetup_execute 'stow --verbose=1 -R -d ${HOME}/dotfiles -t ${HOME} home'
+__dotsetup_execute 'stow --verbose=1 -R -d ${__dotsetup_dotfiles_directory} -t ${HOME} home'
 
 __dotsetup_check_last_command
 
@@ -43,11 +44,9 @@ __dotsetup_log INFO "Copying powermenu.sh and launcher.sh..."
 __dotsetup_execute 'sudo cp ${HOME}/.config/rofi/powermenu/type-4/powermenu.sh /usr/local/bin'
 __dotsetup_execute 'sudo cp ${HOME}/.config/rofi/launchers/type-6/launcher.sh /usr/local/bin'
 
-__dotsetup_log INFO "Installing nitch"
+__dotsetup_log INFO "Creating betterlockscreen cache..."
 
-__dotsetup_execute 'wget "https://github.com/unxsh/nitch/releases/download/0.1.6/nitchNerd"'
-__dotsetup_execute 'chmod +x nitchNerd'
-__dotsetup_execute 'sudo mv nitchNerd /usr/local/bin/nitch'
+__dotsetup_execute 'betterlockscreen -u ${__dotsetup_dotfiles_directory}/home/wallpapers/space_of_jupiter.png'
 
 __dotsetup_log INFO "Changing default shell to zsh..."
 
