@@ -16,7 +16,7 @@ fi
 
 __dotsetup_log INFO "Installing packages from packages-pacman.txt..."
 
-__dotsetup_execute 'sudo pacman -Sy --noconfirm --needed - < "$(dirname "$0")/packages/packages-pacman.txt"'
+__dotsetup_execute 'sudo pacman -Sy --noconfirm --needed - < "$(dirname "$0")/packages-pacman.txt"'
 
 __dotsetup_log INFO "Gaining write permissions on Spotify files needed for spicetify to work..."
 
@@ -25,7 +25,7 @@ __dotsetup_execute 'sudo chmod a+wr /opt/spotify/Apps -R'
 
 __dotsetup_log INFO "Installing packages from packages-aur.txt..."
 
-__dotsetup_execute 'yay -S --noconfirm --needed - < "$(dirname "$0")/packages/packages-aur.txt"'
+__dotsetup_execute 'yay -S --noconfirm --needed - < "$(dirname "$0")/packages-aur.txt"'
 
 __dotsetup_execute 'sudo gpasswd -a $USER plugdev'
 __dotsetup_execute 'sudo gpasswd -a $USER docker'
