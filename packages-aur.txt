@@ -11,7 +11,6 @@ pcsx2-latest-bin
 polychromatic
 scolorpicker
 smu
-spicetify-cli
 spotify
 unicode
 volctl
