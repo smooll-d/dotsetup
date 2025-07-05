@@ -4,6 +4,8 @@ source "$(dirname "$0")/utils.sh"
 
 __dotsetup_log INFO "Setting up ${HOME}..."
 
+__dotsetup_dotfiles_setup
+
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/wallpapers'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/bleachbit'
 __dotsetup_execute '__dotsetup_backup_files ${HOME}/.config/btop'
