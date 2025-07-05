@@ -34,7 +34,7 @@ __dotsetup_execute '__dotsetup_backup_files ${HOME}/.xprofile'
 
 __dotsetup_log INFO "Stowing ${__dotsetup_dotfiles_directory}/home..."
 
-__dotsetup_execute 'stow --verbose=1 -R -d ${__dotsetup_dotfiles_directory} -t ${HOME} home'
+__dotsetup_execute 'stow --verbose=1 --dir=${__dotsetup_dotfiles_directory} --target=${HOME} home'
 
 __dotsetup_check_last_command
 
