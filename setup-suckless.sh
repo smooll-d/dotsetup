@@ -2,19 +2,9 @@
 
 source "$(dirname "$0")/utils.sh"
 
-__dotsetup_suckless_directory=""
-
 __dotsetup_log INFO "Setting up suckless tools..."
 
-if __dotsetup_detect_personal; then
-    __dotsetup_suckless_directory="/personal/suckless"
-else
-    if [ ! -e "suckless/" ]; then
-        __dotsetup_log INFO "Downloading suckless..."
-        __dotsetup_execute 'git clone --depth 1 https://github.com/smooll-d/suckless.git'
-        __dotsetup_suckless_directory="./suckless"
-    fi
-fi
+__dotsetup_suckless_setup
 
 __dotsetup_log INFO "Installing dwm..."
 

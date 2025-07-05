@@ -2,15 +2,7 @@
 
 source "$(dirname "$0")/utils.sh"
 
-if __dotsetup_detect_personal; then
-    __dotsetup_dotfiles_directory="/personal/dotfiles"
-else
-    if [ ! -e "${HOME}/dotfiles" ]; then
-        __dotsetup_log WARNING "dotfiles not found, downloading..."
-        __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
-        __dotsetup_dotfiles_directory="${HOME}/dotfiles"
-    fi
-fi
+__dotsetup_dotfiles_setup
 
 __dotsetup_log INFO "Setting up system-wide configurations..."
 

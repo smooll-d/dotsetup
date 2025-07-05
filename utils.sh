@@ -15,6 +15,7 @@ __dotsetup_sudo_user="${USER} ALL=(ALL) NOPASSWD: ALL"
 __dotsetup_version="v1.3.1"
 
 __dotsetup_dotfiles_directory=""
+__dotsetup_suckless_directory=""
 
 __dotsetup_cli()
 {
@@ -118,6 +119,32 @@ __dotsetup_detect_personal()
     else
         __dotsetup_log INFO "Mounted personal partition not found, using fallback..."
         return 1
+    fi
+}
+
+__dotsetup_dotfiles_setup()
+{
+    if __dotsetup_detect_personal; then
+        __dotsetup_dotfiles_directory="/personal/dotfiles"
+    else
+        if [ ! -e "${HOME}/dotfiles" ]; then
+            __dotsetup_log WARNING "dotfiles not found, downloading..."
+            __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
+            __dotsetup_dotfiles_directory="${HOME}/dotfiles"
+        fi
+    fi
+}
+
+__dotsetup_suckless_setup()
+{
+    if __dotsetup_detect_personal; then
+        __dotsetup_suckless_directory="/personal/suckless"
+    else
+        if [ ! -e "suckless/" ]; then
+            __dotsetup_log INFO "Downloading suckless..."
+            __dotsetup_execute 'git clone --depth 1 https://github.com/smooll-d/suckless.git'
+            __dotsetup_suckless_directory="./suckless"
+        fi
     fi
 }
 
