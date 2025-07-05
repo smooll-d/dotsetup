@@ -37,3 +37,4 @@ __dotsetup_execute 'curl -fsSL https://raw.githubusercontent.com/spicetify/marke
 
 __dotsetup_execute 'sudo gpasswd -a $USER plugdev'
 __dotsetup_execute 'sudo gpasswd -a $USER docker'
+__dotsetup_execute 'sudo gpasswd -a $USER informant'
