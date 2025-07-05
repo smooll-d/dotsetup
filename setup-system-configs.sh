@@ -6,7 +6,6 @@ __dotsetup_dotfiles_setup
 
 __dotsetup_log INFO "Setting up system-wide configurations..."
 
-__dotsetup_execute '__dotsetup_backup_files /etc/makepkg.conf copy'
 __dotsetup_execute '__dotsetup_backup_files /etc/fstab copy'
 __dotsetup_execute '__dotsetup_backup_files /etc/mkinitcpio.conf'
 __dotsetup_execute '__dotsetup_backup_files /etc/pacman.conf'
@@ -50,12 +49,6 @@ __dotsetup_log INFO "Regenerating grub config..."
 __dotsetup_execute 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 __dotsetup_check_last_command
-
-__dotsetup_log INFO "Disabling debug symbols in makepkg.conf..."
-__dotsetup_execute 'sed -i "/^OPTIONS=/ {
-  /[[:space:]]debug[[:space:]]/ s/\bdebug\b/!debug/g
-  /[[:space:]]!debug[[:space:]]/! s/^\(OPTIONS=(.*\))/\1 !debug)/
-}" /etc/makepkg.conf'
 
 __dotsetup_log INFO "Modifying mount options in /etc/fstab..."
 
