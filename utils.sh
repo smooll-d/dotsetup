@@ -127,10 +127,10 @@ __dotsetup_dotfiles_setup()
     if __dotsetup_detect_personal; then
         __dotsetup_dotfiles_directory="/personal/dotfiles"
     else
+        __dotsetup_dotfiles_directory="${HOME}/dotfiles"
         if [ ! -e "${HOME}/dotfiles" ]; then
             __dotsetup_log WARNING "dotfiles not found, downloading..."
             __dotsetup_execute 'git clone --depth 1 --recursive https://github.com/smooll-d/dotfiles.git ${HOME}/dotfiles'
-            __dotsetup_dotfiles_directory="${HOME}/dotfiles"
         fi
     fi
 }
@@ -140,10 +140,10 @@ __dotsetup_suckless_setup()
     if __dotsetup_detect_personal; then
         __dotsetup_suckless_directory="/personal/suckless"
     else
+        __dotsetup_suckless_directory="./suckless"
         if [ ! -e "suckless/" ]; then
             __dotsetup_log INFO "Downloading suckless..."
             __dotsetup_execute 'git clone --depth 1 https://github.com/smooll-d/suckless.git'
-            __dotsetup_suckless_directory="./suckless"
         fi
     fi
 }

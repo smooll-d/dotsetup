@@ -5,6 +5,7 @@ source "$(dirname "$0")/utils.sh"
 __dotsetup_execute '__dotsetup_backup_files /etc/makepkg.conf copy'
 
 __dotsetup_log INFO "Disabling debug symbols in makepkg.conf..."
+
 __dotsetup_execute 'sed -i "/^OPTIONS=/ {
   /[[:space:]]debug[[:space:]]/ s/\bdebug\b/!debug/g
   /[[:space:]]!debug[[:space:]]/! s/^\(OPTIONS=(.*\))/\1 !debug)/
