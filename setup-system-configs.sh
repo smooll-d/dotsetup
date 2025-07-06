@@ -57,7 +57,7 @@ __dotsetup_execute 'echo "tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0" | sud
 
 __dotsetup_log INFO "Modifying mount options in /etc/fstab..."
 
-__dotsetup_execute 'sudo sed -i -E "s@^(UUID=[^[:space:]]+[[:space:]]+/[[:space:]]+ext4[[:space:]])[^[:space:]]+@\1rw,relatime,lazytime,commit=60,journal_async_commit@" /etc/fstab'
+__dotsetup_execute 'sudo sed -i -E "s@^(UUID=[^[:space:]]+[[:space:]]+/[[:space:]]+ext4[[:space:]]+)[^[:space:]]+@\1rw,relatime,lazytime,commit=60,journal_async_commit@" /etc/fstab'
 
 __dotsetup_log INFO "Disabling Shift Mode in xpadneo..."
 
