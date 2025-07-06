@@ -46,7 +46,7 @@ __dotsetup_execute 'sudo cp ${HOME}/.config/rofi/launchers/type-6/launcher.sh /u
 
 __dotsetup_log INFO "Installing oh-my-zsh..."
 
-__dotsetup_execute 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+__dotsetup_execute 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc'
 
 __dotsetup_log INFO "Changing default shell to zsh..."
 
