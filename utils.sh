@@ -79,6 +79,8 @@ __dotsetup_main()
     __dotsetup_calculate_time
 
     __dotsetup_delete_backups
+
+    __dotsetup_cleanup
 }
 
 __dotsetup_rerun()
@@ -266,6 +268,18 @@ __dotsetup_reset_sudoers_file()
     __dotsetup_execute 'sudo -E -- sed -i "/^${__dotsetup_sudo_user}/d" /etc/sudoers'
 
     __dotsetup_log SUCCESS "Finished in ${__dotsetup_duration}!"
+}
+
+__dotsetup_cleanup()
+{
+    __dotsetup_log INFO "Deleting dotsetup files..."
+
+    local __dotsetup_files=("dotsetup" "packages-pacman.txt" "packages-aur.txt" "install-packages.sh" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh" "utils.sh")
+
+    for __dotsetup_file in "${__dotsetup_files[@]}"; do
+        __dotsetup_log WARNING "Deleting ${__dotsetup_file}..."
+        rm __dotsetup_file
+    done
 }
 
 __dotsetup_help()
