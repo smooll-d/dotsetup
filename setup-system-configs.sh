@@ -50,14 +50,14 @@ __dotsetup_execute 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 __dotsetup_check_last_command
 
-__dotsetup_log INFO "Modifying mount options in /etc/fstab..."
-
-__dotsetup_execute 'sudo sed -i -E "s@^(UUID=[^[:space:]]+[[:space:]]+/[[:space:]]+ext4[[:space:]])[^[:space:]]+@\1rw,relatime,lazytime,commit=60,journal_async_commit@" /etc/fstab'
-
 __dotsetup_log INFO "Adding tmpfs mount points..."
 
 __dotsetup_execute 'echo "tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0" | sudo tee -a /etc/fstab'
 # __dotsetup_execute 'echo "tmpfs /var/log tmpfs defaults,noatime,mode=0755,size=100M 0 0" | sudo tee -a /etc/fstab'
+
+__dotsetup_log INFO "Modifying mount options in /etc/fstab..."
+
+__dotsetup_execute 'sudo sed -i -E "s@^(UUID=[^[:space:]]+[[:space:]]+/[[:space:]]+ext4[[:space:]])[^[:space:]]+@\1rw,relatime,lazytime,commit=60,journal_async_commit@" /etc/fstab'
 
 __dotsetup_log INFO "Disabling Shift Mode in xpadneo..."
 
