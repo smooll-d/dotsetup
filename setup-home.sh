@@ -44,9 +44,9 @@ __dotsetup_log INFO "Copying powermenu.sh and launcher.sh..."
 __dotsetup_execute 'sudo cp ${HOME}/.config/rofi/powermenu/type-4/powermenu.sh /usr/local/bin'
 __dotsetup_execute 'sudo cp ${HOME}/.config/rofi/launchers/type-6/launcher.sh /usr/local/bin'
 
-__dotsetup_log INFO "Creating betterlockscreen cache..."
+__dotsetup_log INFO "Installing oh-my-zsh..."
 
-__dotsetup_execute 'betterlockscreen -u ${__dotsetup_dotfiles_directory}/home/wallpapers/space_of_jupiter.png'
+__dotsetup_execute 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
 
 __dotsetup_log INFO "Changing default shell to zsh..."
 
