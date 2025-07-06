@@ -48,6 +48,10 @@ __dotsetup_log INFO "Installing oh-my-zsh..."
 
 __dotsetup_execute 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc'
 
+__dotsetup_log INFO "Creating empty .ssh directory for ssh-agent plugin..."
+
+__dotsetup_execute 'mkdir ${HOME}/.ssh'
+
 __dotsetup_log INFO "Changing default shell to zsh..."
 
 __dotsetup_execute 'sudo chsh -s $(which zsh) ${USER}'
