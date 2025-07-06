@@ -4,7 +4,6 @@ bibata-cursor-theme-bin
 canon-pixma-mg2500-complete
 informant
 kora-icon-theme
-mkinitcpio-firmware
 nohang-git
 openrazer-meta-git
 pcsx2-latest-bin
