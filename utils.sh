@@ -278,7 +278,7 @@ __dotsetup_cleanup()
 
     for __dotsetup_file in "${__dotsetup_files[@]}"; do
         __dotsetup_log WARNING "Deleting ${__dotsetup_file}..."
-        rm ${__dotsetup_file}
+        rm ./${__dotsetup_file}
     done
 }
 
