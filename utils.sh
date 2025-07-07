@@ -278,7 +278,7 @@ __dotsetup_cleanup()
             local __dotsetup_files=("dotsetup" "packages-pacman.txt" "packages-aur.txt" "install-packages.sh" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh" "utils.sh" "dotsetup.log")
 
             for __dotsetup_file in "${__dotsetup_files[@]}"; do
-                if [ -e "$(pwd)/${__dotsetup_file}" ]; then
+                if [ -e "${PWD}/${__dotsetup_file}" ]; then
                     __dotsetup_execute 'rm $(pwd)/${__dotsetup_file}'
                     __dotsetup_check_last_command
                     __dotsetup_log SUCCESS "Successfully deleted ${__dotsetup_file}!"
