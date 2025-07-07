@@ -5,9 +5,7 @@ canon-pixma-mg2500-complete
 informant
 kora-icon-theme
 nohang-git
-openrazer-meta-git
 pcsx2-latest-bin
-polychromatic
 scolorpicker
 smu
 spotify

@@ -40,6 +40,7 @@ lxsession
 ly
 man-db
 mpv
+nautilus
 ncdu
 neovim
 network-manager-applet
@@ -54,7 +55,6 @@ pacutils
 pamixer
 parcellite
 pavucontrol
-pcmanfm
 picom
 playerctl
 plymouth
