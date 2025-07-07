@@ -199,16 +199,13 @@ __dotsetup_delete_backups()
                         __dotsetup_check_last_command
                         __dotsetup_log SUCCESS "Successfully deleted ${__dotsetup_backup}!"
                     else
-                        __dotsetup_log INFO "${__dotsetup_backup} does not exist."
+                        __dotsetup_log ERROR "${__dotsetup_backup} does not exist!"
                     fi
                 done
             fi
             ;;
-        [Nn])
+        [Nn]|*)
             __dotsetup_log INFO "Not deleting backups."
-            ;;
-        *)
-            __dotsetup_log INFO "Invalid input. Not deleting backups."
             ;;
     esac
 }
@@ -272,14 +269,28 @@ __dotsetup_reset_sudoers_file()
 
 __dotsetup_cleanup()
 {
-    __dotsetup_log INFO "Deleting dotsetup files..."
+    read -p "Delete dotsetup? [y/N]: " __dotsetup_delete
 
-    local __dotsetup_files=("dotsetup" "packages-pacman.txt" "packages-aur.txt" "install-packages.sh" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh" "utils.sh")
+    case "${__dotsetup_delete}" in
+        [yY])
+            __dotsetup_log INFO "Deleting dotsetup files..."
 
-    for __dotsetup_file in "${__dotsetup_files[@]}"; do
-        __dotsetup_log WARNING "Deleting ${__dotsetup_file}..."
-        rm $(pwd)/${__dotsetup_file}
-    done
+            local __dotsetup_files=("dotsetup" "packages-pacman.txt" "packages-aur.txt" "install-packages.sh" "setup-system-configs.sh" "setup-home.sh" "setup-suckless.sh" "utils.sh" "dotsetup.log")
+
+            for __dotsetup_file in "${__dotsetup_files[@]}"; do
+                if [ -e "${__dotsetup_file} "]; then
+                    __dotsetup_execute 'rm $(pwd)/${__dotsetup_file}'
+                    __dotsetup_check_last_command
+                    __dotsetup_log SUCCESS "Successfully deleted ${__dotsetup_file}!"
+                else
+                    __dotsetup_log ERROR "${__dotsetup_file} does not exist!"
+                fi
+            done
+            ;;
+        [nN]|*)
+            __dotsetup_log INFO "Not deleting dotsetup."
+            ;;
+    esac
 }
 
 __dotsetup_help()
