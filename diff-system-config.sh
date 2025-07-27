@@ -4,7 +4,7 @@ source "$(dirname "$0")/utils.sh"
 
 check_diffs()
 {
-    diff ~/dotfiles/etc/$1 /etc/$1
+    diff ~/dotfiles/etc/"$1" /etc/"$1"
 }
 
 __dotfiles_log INFO "Checking default..."

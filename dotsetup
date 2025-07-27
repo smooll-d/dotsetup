@@ -5,7 +5,7 @@ __dotsetup_files=("utils.sh" "install-packages.sh" "packages-pacman.txt" "packag
 for __dotsetup_file in "${__dotsetup_files[@]}"; do
     if [ ! -e "$(dirname "$0")/${__dotsetup_file}" ]; then
         echo -e "\033[33m! ${__dotsetup_file} not found, downloading...\033[0m"
-        curl -# -LO https://github.com/smooll-d/dotsetup/raw/refs/heads/master/${__dotsetup_file}
+        curl -# -LO "https://github.com/smooll-d/dotsetup/raw/refs/heads/master/${__dotsetup_file}"
     fi
 done
 
